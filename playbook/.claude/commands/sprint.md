@@ -8,9 +8,70 @@ description: Create GitHub issues from a roadmap milestone
 1. Read `docs/planning/STATUS.md`
 2. Read `docs/planning/roadmap.md` - stop if it doesn't exist and suggest running `/roadmap` first
 3. Read `docs/planning/prd.md` for context
-4. Update STATUS.md to reflect: "Phase: Sprint Planning"
+4. Read `docs/planning/INFRASTRUCTURE.md` - note any 🔴 items
+5. Update STATUS.md to reflect: "Phase: Sprint Planning"
+
+**Prerequisite Check - GitHub CLI:**
+```bash
+gh auth status
+```
+If not authenticated:
+```
+⚠️ GitHub CLI not authenticated.
+
+This command creates GitHub issues and requires authentication.
+
+To fix:
+  gh auth login
+
+Or run /setup to check all prerequisites.
+```
+→ Stop until resolved.
 
 ## Sprint Process
+
+**Step 0 - Check Infrastructure Prerequisites**
+
+Read `docs/planning/INFRASTRUCTURE.md`. If any services have status 🔴:
+
+1. Create Issue #0: "Provision infrastructure prerequisites"
+
+```markdown
+Title: [Infra]: Provision infrastructure prerequisites
+
+## Context
+Before building features, external services must be provisioned.
+See: docs/planning/INFRASTRUCTURE.md
+
+## Required Services
+[List each 🔴 service from INFRASTRUCTURE.md]
+
+- [ ] [Service 1] - [Purpose]
+- [ ] [Service 2] - [Purpose]
+...
+
+## Environment Variables Needed
+[List from INFRASTRUCTURE.md]
+
+- [ ] [VAR_NAME] - [Service]
+...
+
+## Steps
+Run `/infra` for guided setup of each service.
+
+## Acceptance Criteria
+- [ ] All services in INFRASTRUCTURE.md marked 🟢
+- [ ] All required env vars added to .env.local
+- [ ] Can connect to all services locally
+- [ ] Migrations/schema applied (if applicable)
+
+## Notes
+This issue blocks all feature development.
+```
+
+Labels: `infrastructure`, `blocker`, `milestone-1`
+
+2. Note this issue number for dependency linking
 
 **Step 1 - Select Milestone**
 If no milestone specified in $ARGUMENTS, ask:
@@ -44,7 +105,7 @@ Feature: [Feature name from roadmap]
 
 ## Technical Notes
 - Complexity: [Low/Medium/High]
-- Dependencies: [List any blocking issues]
+- Dependencies: [List any blocking issues, including infra issue if created]
 - Files likely involved: [src/...]
 
 ## References
@@ -56,6 +117,12 @@ Labels to apply:
 - `milestone-1` (or appropriate milestone)
 - `feature-[name]`
 - `complexity-[low/medium/high]`
+
+**If infrastructure issue was created in Step 0:**
+Add to each feature issue's Technical Notes:
+```
+- Dependencies: #[infra-issue-number] (infrastructure must be provisioned first)
+```
 
 **Step 4 - Create Milestone in GitHub (if not exists)**
 ```bash
@@ -74,10 +141,32 @@ Update `docs/planning/STATUS.md`:
 - Phase: Build
 - Current milestone: [Name]
 - List created issues with numbers
-- Set next action: Run /fix-issue [lowest number] to start building
+- Next: "Next: Run `/infra`" (if infra needed) or "Next: Run `/fix-issue [#]`"
 
 **Step 7 - Summary**
 Present list of created issues:
+
+**If infrastructure issue was created:**
+```
+⚠️ INFRASTRUCTURE REQUIRED FIRST
+================================
+
+#[N]: [Infra]: Provision infrastructure prerequisites ← START HERE
+      Run: /infra
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Created [X] feature issues for Milestone 1:
+- #[N+1]: [Feature]: Create user table schema (depends on #[N])
+- #[N+2]: [Feature]: Build user API route (depends on #[N])
+- #[N+3]: [Feature]: Build user signup UI (depends on #[N])
+...
+
+After infrastructure is provisioned:
+Run: /fix-issue [N+1]
+```
+
+**If no infrastructure needed:**
 ```
 Created [X] issues for Milestone 1:
 - #12: [Feature]: Create user table schema
@@ -88,3 +177,10 @@ Created [X] issues for Milestone 1:
 Recommended order: Start with #12 (no dependencies)
 Run: /fix-issue 12
 ```
+
+---
+
+## Related Commands
+
+- `/backlog` — See all features: what's ready vs. needs more definition
+- `/milestone` — Use after completing all issues in a milestone

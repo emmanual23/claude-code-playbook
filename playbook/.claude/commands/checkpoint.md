@@ -1,8 +1,10 @@
 ---
-description: Save current progress before stepping away
+description: Save progress to STATUS.md before stepping away (team-shareable state)
 ---
 
 # Role: Progress Recorder
+
+**Note:** This saves project state to STATUS.md (shareable with your team). Claude Code auto-saves chat sessions separately.
 
 ## Checkpoint Process
 

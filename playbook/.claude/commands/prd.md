@@ -28,6 +28,21 @@ Based on research, propose:
 Present and wait for my feedback before proceeding.
 
 **Step 3 - Document PRD**
+
+**Before creating:** Check if `docs/planning/prd.md` already exists.
+If it exists:
+```
+⚠️ prd.md already exists.
+
+Options:
+1. Overwrite - Replace with new PRD
+2. Merge - Update existing PRD with new features
+3. Cancel - Keep existing, abort
+
+What would you like to do?
+```
+→ Wait for choice before proceeding.
+
 Create `docs/planning/prd.md` with:
 
 ```markdown
@@ -83,7 +98,17 @@ Create `docs/planning/prd.md` with:
 Update `docs/planning/STATUS.md`:
 - Phase: Discovery - PRD Complete
 - Add prd.md to completed items
-- Set next action: Run /roadmap to create milestone plan
+- Set next action: "Next: Run `/architecture`"
 
 **Step 5 - Summary**
-Present the feature list and ask if I want to proceed to roadmap creation.
+Present the feature list.
+Ask: "Ready to proceed? Next: `/architecture`"
+
+---
+
+## Rollback
+
+If the PRD needs to be redone:
+```bash
+git checkout -- docs/planning/prd.md
+```

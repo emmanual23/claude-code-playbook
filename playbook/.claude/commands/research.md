@@ -36,6 +36,21 @@ Investigate and document (use web search as needed):
    - What's the unique angle?
 
 **Step 3 - Document Findings**
+
+**Before creating:** Check if `docs/planning/research.md` already exists.
+If it exists:
+```
+⚠️ research.md already exists.
+
+Options:
+1. Overwrite - Replace with new research
+2. Merge - Add new findings to existing document
+3. Cancel - Keep existing, abort this research
+
+What would you like to do?
+```
+→ Wait for choice before proceeding.
+
 Create `docs/planning/research.md` with:
 
 ```markdown
@@ -74,7 +89,17 @@ Create `docs/planning/research.md` with:
 Update `docs/planning/STATUS.md`:
 - Phase: Discovery - Research Complete
 - Add research.md to completed items
-- Set next action: Run /prd to create product requirements
+- Set next action: "Next: Run `/prd`"
 
 **Step 5 - Summary**
-Present a brief summary of findings and ask if I want to proceed to PRD creation.
+Present a brief summary of findings.
+Ask: "Ready to proceed? Next: `/prd`"
+
+---
+
+## Rollback
+
+If the research needs to be redone:
+```bash
+git checkout -- docs/planning/research.md
+```

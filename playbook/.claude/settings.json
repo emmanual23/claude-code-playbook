@@ -1,0 +1,43 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '✓ File modified - remember to test changes'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command", 
+            "command": "echo '📝 Session ending - consider running /checkpoint to save progress'"
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Edit(**)",
+      "Write(**)",
+      "Bash(npm run lint)",
+      "Bash(npm run test)",
+      "Bash(npm run build)",
+      "Bash(git *)"
+    ],
+    "deny": [
+      "Bash(rm -rf /)",
+      "Bash(rm -rf ~)",
+      "Bash(curl * | bash)",
+      "Bash(wget * | bash)"
+    ]
+  }
+}

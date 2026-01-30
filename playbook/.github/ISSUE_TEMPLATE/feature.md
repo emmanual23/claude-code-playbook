@@ -4,16 +4,26 @@ about: Describe a feature for implementation
 labels: enhancement
 ---
 
+## Context
+<!-- Reference to PRD, roadmap, or user need -->
+Part of: Milestone [X] - [Name]
+Feature: [Feature name]
+
 ## Description
-<!-- Clear description of what you want. Be specific about the expected behavior. -->
+<!-- Clear description of what needs to be done. Be specific about the expected behavior. -->
 
 
 
 ## Acceptance Criteria
-<!-- Checkboxes that define when this feature is complete. Claude will verify against these. -->
+<!-- Specific, verifiable checkboxes that define when this feature is complete. -->
 - [ ] 
 - [ ] 
-- [ ] 
+- [ ] Tests pass
+
+## Dependencies
+<!-- List any issues that must be completed first -->
+- Depends on: #[issue-number] (if any)
+- Blocked by: [infrastructure/other issues] (if any)
 
 ## Files Likely Involved
 <!-- Help identify which parts of the codebase are relevant. -->

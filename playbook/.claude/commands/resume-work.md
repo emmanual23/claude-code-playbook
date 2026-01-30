@@ -1,8 +1,10 @@
 ---
-description: Resume work from where you left off
+description: Read STATUS.md and continue where you left off (different from native /resume)
 ---
 
 # Role: Session Continuity Manager
+
+**Note:** This command reads your project's STATUS.md file for team-shareable project state. It's different from Claude Code's native `/resume` command which continues a previous chat session.
 
 ## Resume Process
 
@@ -45,6 +47,8 @@ Based on STATUS.md, suggest the most logical next action:
 - If mid-issue: "Continue implementing #[number]?"
 - If between tasks: "Next up is #[number]: [description]. Start?"
 - If blocked: "Last session had a blocker: [description]. Has this been resolved?"
+- If unsure what to work on: "Run `/backlog` to see what's ready vs. needs definition"
+- If milestone complete: "Milestone done! Run `/milestone` to start the next one"
 
 **Step 4 - Wait for Confirmation**
 Don't proceed automatically. Wait for my response:

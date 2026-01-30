@@ -29,6 +29,32 @@ Active Work: [What's in progress]
 💡 Suggested Action: [What to do next]
 ```
 
+**If in Build phase**, also show issue dependency status:
+
+```bash
+gh issue list --state open --limit 20 --json number,title,body
+```
+
+Parse issue bodies for "depends on #" or "blocked by #" patterns:
+
+```
+📊 ISSUE DEPENDENCIES
+=====================
+
+🟢 READY (no blockers):
+├── #12: Create user table schema
+├── #15: Add error logging
+└── #18: Update README
+
+🟡 BLOCKED (waiting on other issues):
+├── #13: Build user API → waiting on #12
+├── #14: Build signup UI → waiting on #13
+└── #16: User dashboard → waiting on #13, #14
+
+🔴 INFRASTRUCTURE BLOCKED:
+└── #11: [Infra] Provision services → run /infra
+```
+
 Then ask: "Do you want to update anything, or continue with [suggested action]?"
 
 ## If STATUS.md Doesn't Exist
@@ -84,3 +110,13 @@ When I provide an update, modify STATUS.md accordingly:
 - Change the phase if appropriate
 
 Confirm the update was made.
+
+## Subcommands
+
+**`/status deps`** — Show only the dependency graph
+**`/status update [text]`** — Quick update to STATUS.md
+
+## Related Commands
+
+- `/backlog` — See what's ready to build vs. needs definition
+- `/milestone` — Transition to next milestone when current is complete

@@ -16,9 +16,11 @@ Run through each section and report status.
 ```bash
 npm run lint
 npm run test
+npm run test:e2e
 ```
 - [ ] Lint passes with no errors
-- [ ] All tests pass
+- [ ] All unit/integration tests pass
+- [ ] All E2E tests pass
 - [ ] No skipped tests without justification
 
 **2. Security**

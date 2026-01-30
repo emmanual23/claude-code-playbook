@@ -38,6 +38,21 @@ For each feature, identify implementable tasks:
 - Integration points
 
 **Step 4 - Document Roadmap**
+
+**Before creating:** Check if `docs/planning/roadmap.md` already exists.
+If it exists:
+```
+⚠️ roadmap.md already exists.
+
+Options:
+1. Overwrite - Replace with new roadmap
+2. Merge - Add new milestones to existing
+3. Cancel - Keep existing, abort
+
+What would you like to do?
+```
+→ Wait for choice before proceeding.
+
 Create `docs/planning/roadmap.md` with:
 
 ```markdown
@@ -105,7 +120,24 @@ M1:F1 → M1:F2 → M2:F3
 Update `docs/planning/STATUS.md`:
 - Phase: Discovery - Roadmap Complete
 - Add roadmap.md to completed items
-- Set next action: Run /sprint to create GitHub issues for Milestone 1
+- Next: "Next: Run `/sprint`"
 
 **Step 6 - Summary**
-Present milestone overview and ask: "Ready to create GitHub issues for Milestone 1?"
+Present milestone overview.
+Ask: "Ready to proceed? Next: `/sprint` to create GitHub issues"
+
+---
+
+## Rollback
+
+If the roadmap needs to be redone:
+```bash
+git checkout -- docs/planning/roadmap.md
+```
+
+---
+
+## Related Commands
+
+- `/sprint` — Create GitHub issues from this roadmap
+- `/milestone` — After completing all issues in a milestone, use this to start the next one
