@@ -2,7 +2,7 @@
 
 ## Project Context
 
-This is the Claude Code Playbook — a workflow system of 22 slash commands that users copy into their projects. This repo is the **source**, not a consumer of the playbook.
+This is the Claude Code Playbook — a workflow system of 23 slash commands that users copy into their projects. This repo is the **source**, not a consumer of the playbook.
 
 Users copy `playbook/` into their projects. `playbook-global/init-playbook.md` is a global installer that bootstraps everything.
 
@@ -10,7 +10,7 @@ Users copy `playbook/` into their projects. `playbook-global/init-playbook.md` i
 
 ```
 playbook/                        # Source files users copy
-├── .claude/commands/            # 22 slash commands (the core product)
+├── .claude/commands/            # 23 slash commands (the core product)
 ├── CLAUDE.md                    # Constitution template for user projects
 ├── docs/planning/               # Templates (STATUS.md, TECH-DEBT.md, INFRASTRUCTURE.md)
 ├── docs/decisions/              # ADR template

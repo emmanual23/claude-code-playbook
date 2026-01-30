@@ -25,11 +25,12 @@ your-project/
 ├── .claudeignore                # Files for Claude to ignore
 ├── .claude/
 │   ├── settings.json            # Hooks and permissions
-│   └── commands/                # Slash commands (22 total)
+│   └── commands/                # Slash commands (23 total)
 │       ├── research.md          # Product research
 │       ├── prd.md               # Create PRD
 │       ├── architecture.md      # Technical architecture
 │       ├── adr.md               # Architecture decision records
+│       ├── enhance.md           # Research & plan enhancements
 │       ├── roadmap.md           # Create roadmap
 │       ├── sprint.md            # Create GitHub issues from roadmap
 │       ├── infra.md             # Provision infrastructure
@@ -236,6 +237,25 @@ Skip this step if INFRASTRUCTURE.md shows all 🟢.
 ```
 
 Now you're ready to build with `/fix-issue [number]`.
+
+### Adding Enhancements Post-Launch
+
+After your product is live, use `/enhance` to research and plan new features:
+
+```
+Type: /enhance Add dark mode support
+
+What happens:
+- Claude researches how similar products handle it
+- Validates fit with your product and architecture
+- Drafts a feature specification with acceptance criteria
+- Integrates into PRD, roadmap, and architecture (with your approval)
+- Creates a GitHub issue
+
+Action: Review research and spec. Approve integration into planning docs.
+```
+
+**Tip:** Use `/enhance --research-only` to explore an idea without updating planning docs.
 
 ---
 
@@ -573,6 +593,7 @@ Each enabled MCP server consumes context. Use `/mcp` to manage.
 | Document architecture decisions | `/adr` |
 | Create milestone roadmap | `/roadmap` |
 | Create GitHub issues from roadmap | `/sprint` |
+| Research & plan an enhancement | `/enhance` |
 | Provision external services | `/infra` |
 
 ### Build Phase
@@ -648,6 +669,7 @@ playbook/
 │       ├── prd.md               # Product requirements document
 │       ├── architecture.md      # Technical architecture
 │       ├── adr.md               # Architecture decision records
+│       ├── enhance.md           # Research & plan enhancements
 │       ├── roadmap.md           # Milestone planning
 │       ├── sprint.md            # Create GitHub issues from roadmap
 │       ├── infra.md             # Provision infrastructure

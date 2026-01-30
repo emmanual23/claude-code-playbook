@@ -2,13 +2,14 @@
 
 ## Commands by Phase
 
-### Discovery (7)
+### Discovery (8)
 | Command | Purpose |
 |---------|---------|
 | `/research` | Research product idea, competitors, market |
 | `/prd` | Create Product Requirements Document |
 | `/architecture` | Define data model, APIs, components, infrastructure |
 | `/adr` | Document architecture decisions |
+| `/enhance` | Research & plan an enhancement to existing product |
 | `/roadmap` | Create milestones from PRD |
 | `/sprint` | Generate GitHub issues from roadmap |
 | `/infra` | Provision external services (databases, APIs, hosting) |

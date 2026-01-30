@@ -6,6 +6,18 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.2.0] - 2026-01-30
+
+### Added
+- **`/enhance` command** — Research and plan enhancements to existing products. Validates fit, drafts feature specs, integrates into PRD/roadmap/architecture, and creates GitHub issues. Supports `--research-only`, `--from-feedback`, and quick mode.
+- **5 new project archetypes** — AI/LLM App, Go + Gin, Django + HTMX, Hono Edge/Serverless, Flutter Mobile (13 total)
+
+### Changed
+- **Updated 6 existing archetypes** — NestJS replaces Express, uv replaces pip, Maestro replaces Detox, picocolors replaces chalk, Zustand as default, Fly.io added
+- **Command count** — Updated from 22 to 23 across README, CHEATSHEET, and init-playbook
+
+---
+
 ## [1.1.0] - 2026-01-29
 
 ### Removed
@@ -126,6 +138,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 | Version | Date | Summary |
 |---------|------|---------|
+| 1.2.0 | 2026-01-30 | Added `/enhance` command, 13 archetypes (23 commands) |
+| 1.1.0 | 2026-01-29 | Added `/infra`, `/milestone`, `/backlog`, `/setup`; fixed 21 gaps |
 | 1.0.0 | 2026-01-29 | Initial release with 19 commands |
 
 ---
