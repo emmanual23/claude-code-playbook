@@ -1,0 +1,7 @@
+#!/bin/sh
+# Auto-regenerate WORKFLOW-GUIDE.html if any command files changed
+CHANGED=$(git diff --cached --name-only -- 'playbook/.claude/commands/*.md' 'playbook-auto/.claude/commands/*.md')
+if [ -n "$CHANGED" ]; then
+  node generate-guide.js
+  git add WORKFLOW-GUIDE.html
+fi
