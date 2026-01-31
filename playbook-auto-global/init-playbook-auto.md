@@ -102,6 +102,21 @@ Ask these questions ONE AT A TIME:
 → Use the selected archetype from `docs/ARCHETYPES.md`
 → For custom stacks, use the user's description to fill CLAUDE.md section 2
 
+4. **Design System Customization** (only for UI archetypes)
+
+→ **UI archetypes** (1: Next.js+Supabase, 3: AI/LLM App, 5: React Native+Expo, 7: React+Vite, 8: Astro, 9: Chrome Extension, 11: Django+HTMX, 13: Flutter, 14: Godot Game): Ask this question.
+→ **Non-UI archetypes** (2: FastAPI, 4: NestJS, 6: Node.js CLI, 10: Go+Gin, 12: Hono): Skip this question entirely. Use the **NON-UI DESIGN STUB** (see Design System Blocks below) for Section 9.
+
+"Would you like to customize the design system for this project?
+
+   **A.** Use the default (clean, professional — works great for most projects)
+   **B.** Let's design something tailored (I'll ask a few questions, then research your space)"
+
+→ **Option A:** Use the **DEFAULT DESIGN SYSTEM** block (see Design System Blocks below) for Section 9.
+→ **Option B:** Run the **Design Discovery Process** (see Design Discovery Process section at the end of this file). After completing it, use the generated design system for Section 9.
+
+→ Store the chosen Section 9 content as `{{DESIGN_SYSTEM}}` for insertion into CLAUDE.md.
+
 ### Create Folder Structure
 ```
 .claude/commands/
@@ -448,55 +463,7 @@ Update `docs/planning/STATUS.md` with:
 
 ---
 
-## 9. DESIGN SYSTEM
-
-### Philosophy
-Professional, information-dense, minimal. Think "Financial Times meets Stripe."
-NOT: flashy, playful, marketing-heavy, or consumer-app aesthetic.
-
-### Color Palette
-| Role | Value | Usage |
-|------|-------|-------|
-| Background | `white` / `slate-50` | Page backgrounds |
-| Surface | `white` | Cards, modals |
-| Border | `slate-200` | Subtle divisions |
-| Text Primary | `slate-900` | Headings, body |
-| Text Secondary | `slate-500` | Captions, labels |
-| Accent | `slate-600` | Primary buttons, links |
-| Accent Hover | `slate-700` | Button hover states |
-| Success | `emerald-600` | Success states |
-| Warning | `amber-600` | Warning states |
-| Error | `red-600` | Error states |
-
-### Typography
-- **Font:** Inter (system fallback: -apple-system, sans-serif)
-- **Scale:** 12px (caption) → 14px (body) → 16px (lead) → 20px (h3) → 24px (h2) → 30px (h1)
-- **Line height:** 1.5 for body, 1.2 for headings
-- **Font weights:** 400 (normal), 500 (medium), 600 (semibold)
-
-### Spacing
-- Base unit: 4px
-- Use Tailwind spacing: `p-2` (8px), `p-4` (16px), `p-6` (24px)
-- Consistent padding inside cards: `p-6`
-- Gap between sections: `space-y-8`
-
-### Components
-- **Buttons:** Subtle, not loud. Primary = solid slate. Secondary = outline.
-- **Cards:** White background, `border border-slate-200`, `rounded-lg`, `shadow-sm`
-- **Tables:** Clean, minimal borders, hover states on rows
-- **Forms:** Simple labels above inputs, clear focus states
-- **Icons:** Lucide icons only, 20px default size, stroke-width 1.5
-
-### FORBIDDEN
-- Hero sections with large images
-- Gradient backgrounds
-- Colored section backgrounds
-- Decorative illustrations
-- Emojis in UI (okay in content)
-- Marketing-style CTAs ("🚀 Get Started Free!")
-- Excessive animations
-- Card shadows darker than `shadow-sm`
-- More than one accent color
+{{DESIGN_SYSTEM}}
 
 ---
 
@@ -2368,3 +2335,211 @@ Quality (/pre-release): [✅/⚠️ needs test/lint]
 
 List missing items in priority order with exact commands to fix.
 ```
+
+---
+
+# DESIGN SYSTEM BLOCKS
+
+These are the three possible Section 9 values. Use the one that matches the user's path through Question 4.
+
+## DEFAULT DESIGN SYSTEM
+
+Use this when the user picks **Option A** (default) for a UI archetype.
+
+```markdown
+## 9. DESIGN SYSTEM
+
+### Philosophy
+Professional, information-dense, minimal. Think "Financial Times meets Stripe."
+NOT: flashy, playful, marketing-heavy, or consumer-app aesthetic.
+
+### Color Palette
+| Role | Value | Usage |
+|------|-------|-------|
+| Background | `white` / `slate-50` | Page backgrounds |
+| Surface | `white` | Cards, modals |
+| Border | `slate-200` | Subtle divisions |
+| Text Primary | `slate-900` | Headings, body |
+| Text Secondary | `slate-500` | Captions, labels |
+| Accent | `slate-600` | Primary buttons, links |
+| Accent Hover | `slate-700` | Button hover states |
+| Success | `emerald-600` | Success states |
+| Warning | `amber-600` | Warning states |
+| Error | `red-600` | Error states |
+
+### Typography
+- **Font:** Inter (system fallback: -apple-system, sans-serif)
+- **Scale:** 12px (caption) → 14px (body) → 16px (lead) → 20px (h3) → 24px (h2) → 30px (h1)
+- **Line height:** 1.5 for body, 1.2 for headings
+- **Font weights:** 400 (normal), 500 (medium), 600 (semibold)
+
+### Spacing
+- Base unit: 4px
+- Use Tailwind spacing: `p-2` (8px), `p-4` (16px), `p-6` (24px)
+- Consistent padding inside cards: `p-6`
+- Gap between sections: `space-y-8`
+
+### Components
+- **Buttons:** Subtle, not loud. Primary = solid slate. Secondary = outline.
+- **Cards:** White background, `border border-slate-200`, `rounded-lg`, `shadow-sm`
+- **Tables:** Clean, minimal borders, hover states on rows
+- **Forms:** Simple labels above inputs, clear focus states
+- **Icons:** Lucide icons only, 20px default size, stroke-width 1.5
+
+### Layout
+- Max content width: 1280px centered
+- Sidebar: 256px fixed width (if applicable)
+
+### FORBIDDEN
+- Hero sections with large images
+- Gradient backgrounds
+- Colored section backgrounds
+- Decorative illustrations
+- Emojis in UI (okay in content)
+- Marketing-style CTAs ("🚀 Get Started Free!")
+- Excessive animations
+- Card shadows darker than `shadow-sm`
+- More than one accent color
+
+### Reference
+- [Stripe Dashboard](https://stripe.com)
+- [Linear](https://linear.app)
+```
+
+## NON-UI DESIGN STUB
+
+Use this for non-UI archetypes (2: FastAPI, 4: NestJS, 6: Node.js CLI, 10: Go+Gin, 12: Hono).
+
+```markdown
+## 9. DESIGN SYSTEM
+
+This project has no user-facing UI. Design system rules are not applicable.
+
+If UI is added later, run `/init-playbook` in update mode to configure a design system.
+```
+
+---
+
+# DESIGN DISCOVERY PROCESS
+
+Run this when the user picks **Option B** (tailored design) for a UI archetype. Ask all questions ONE AT A TIME, then research, then present a recommendation.
+
+## Q4a — Product & Audience
+
+Ask:
+```
+"Describe your product in one sentence and who will use it.
+(e.g. 'A budgeting app for freelancers' or 'An internal admin dashboard for a logistics company')"
+```
+
+→ Wait for response. Store as `PRODUCT_DESCRIPTION` and `TARGET_AUDIENCE`.
+
+## Q4b — Visual References
+
+Ask:
+```
+"Name 1-3 apps or websites whose visual style you admire.
+(e.g. 'Linear, Notion' or 'Duolingo' or 'I don't have any in mind')"
+```
+
+→ Wait for response. Store as `VISUAL_REFERENCES`.
+
+## Q4c — Desired Feeling
+
+Ask:
+```
+"What feeling should the UI convey? Pick one or describe your own:
+
+   1. Professional & trustworthy (finance, enterprise, B2B)
+   2. Clean & minimal (developer tools, productivity)
+   3. Warm & approachable (consumer, education, health)
+   4. Bold & energetic (gaming, social, entertainment)
+   5. Luxurious & refined (premium products, fashion)
+   6. Something else (describe it)"
+```
+
+→ Wait for response. Store as `DESIRED_FEELING`.
+
+## Web Search Research
+
+After collecting all three answers, perform 4-5 web searches:
+
+1. For each reference app named in Q4b (1-3 searches): `"[reference app] design system UI"`
+2. Competitor patterns: `"[product category] app UI design 2026"`
+3. Audience expectations: `"[target audience] UX expectations"`
+
+If the user said "I don't have any in mind" for Q4b, replace reference searches with:
+- `"best [product category] app UI design examples"`
+
+**Extract from results:** color palettes (actual hex values), typography choices, layout patterns, tone/mood, platform conventions.
+
+## Present Recommendation
+
+Present findings in this format:
+
+```
+🎨 DESIGN RECOMMENDATION
+=========================
+
+Based on: [references], [competitor research], [audience]
+
+PHILOSOPHY
+[2 sentences — the visual feel and why it fits this product]
+
+INSPIRATION
+- [App 1]: [what we're borrowing — e.g. "color restraint, typography scale"]
+- [App 2]: [what we're borrowing — e.g. "card layout, spacing rhythm"]
+
+COLOR PALETTE
+| Role        | Value   | Tailwind Class | Usage            |
+|-------------|---------|----------------|------------------|
+| Background  | #FFFFFF | bg-white       | Page backgrounds |
+| Surface     | ...     | ...            | Cards, panels    |
+| [8-10 rows with actual values]
+
+TYPOGRAPHY
+- Font: [Name] (fallback: [stack])
+- Scale: 12px → 14px → 16px → 20px → 24px → 30px
+
+SPACING
+- Base unit: 4px
+- Card padding: [value]
+- Section gap: [value]
+
+COMPONENTS
+- Buttons: [specific style]
+- Cards: [specific style]
+- Icons: [library]
+
+FORBIDDEN PATTERNS
+- [3-5 project-specific items]
+
+Does this direction feel right? I can adjust colors, typography, or mood.
+```
+
+→ Wait for user approval. Allow up to 2 revision rounds if user wants tweaks.
+
+## Generate Section 9
+
+Once approved, generate a complete Section 9 with **all of these subsections** (this structure is required — `/design-check` audits each subsection by name):
+
+- **Philosophy** — 2-3 sentences on the visual feel
+- **Color Palette** — Table with Role / Value / Usage columns
+- **Typography** — Font, scale, weights, line heights
+- **Spacing** — Base unit, Tailwind values (or pixel values for Godot)
+- **Components** — Buttons, cards, tables, forms, icons
+- **Layout** — Max-width, sidebar (if applicable)
+- **FORBIDDEN** — Bulleted list of project-specific anti-patterns
+- **Reference** — 2-3 sites that inspired the design
+
+### Platform-Specific Variations
+
+**Godot (archetype 14):** Replace Tailwind classes with hex values and pixel sizes throughout. Replace the "Components" subsection with Godot Control node patterns (Button, Panel, MarginContainer, etc.). Add "Art Direction" and "Asset Guidelines" subsections after Components.
+
+**Mobile (archetypes 5, 13 — React Native, Flutter):** After the Reference subsection, append a "Mobile-Specific Rules" subsection:
+- 44pt (iOS) / 48dp (Android) minimum touch targets
+- Safe area handling (notch, home indicator)
+- Platform navigation patterns (tab bar on iOS, bottom nav on Android)
+- System font notes (SF Pro on iOS, Roboto on Android)
+
+→ Use the generated Section 9 as `{{DESIGN_SYSTEM}}` in the CLAUDE.md template.

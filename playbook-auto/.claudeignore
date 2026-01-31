@@ -1,0 +1,68 @@
+# Claude Code Ignore File
+# Files and directories listed here won't be scanned by Claude
+# Similar to .gitignore syntax
+
+# Dependencies
+node_modules/
+vendor/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+.next/
+.nuxt/
+out/
+.output/
+
+# Cache
+.cache/
+.turbo/
+.parcel-cache/
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Environment files (secrets)
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Lock files (large, not useful for Claude)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Generated files
+*.min.js
+*.min.css
+*.map
+
+# Large assets
+*.mp4
+*.mov
+*.avi
+*.zip
+*.tar.gz
+
+# Database files
+*.sqlite
+*.db
