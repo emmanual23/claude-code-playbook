@@ -112,3 +112,9 @@ If the PRD needs to be redone:
 ```bash
 git checkout -- docs/planning/prd.md
 ```
+
+## Related Commands
+
+- `/research` — Market research (input to PRD)
+- `/architecture` — Technical architecture (next step)
+- `/enhance` — Plan enhancements to an existing product

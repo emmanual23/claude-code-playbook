@@ -132,3 +132,8 @@ User says: `/adr deprecate [number]` or `/adr supersede [number] with [new-numbe
 - Bug fixes
 - Style preferences already in CLAUDE.md
 - Decisions that are easily reversible
+
+## Related Commands
+
+- `/architecture` — Technical architecture (often triggers ADR creation)
+- `/autopilot` — Run autonomous build after planning

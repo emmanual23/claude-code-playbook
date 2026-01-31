@@ -285,3 +285,10 @@ If the architecture needs to be redone:
 ```bash
 git checkout -- docs/planning/architecture.md docs/planning/INFRASTRUCTURE.md
 ```
+
+## Related Commands
+
+- `/prd` — Product requirements (input to architecture)
+- `/roadmap` — Create milestones from architecture
+- `/adr` — Document significant architecture decisions
+- `/infra` — Provision infrastructure identified here

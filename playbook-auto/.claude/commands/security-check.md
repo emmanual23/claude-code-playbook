@@ -105,3 +105,10 @@ Present findings as:
 If user says "quick security check":
 - Run only secrets scanning and dependency audit
 - Skip detailed code pattern analysis
+
+## Related Commands
+
+- `/audit` — Security and logic review (code-level)
+- `/deps` — Dependency audit for known vulnerabilities
+- `/pre-release` — Full pre-deployment checklist
+- `/setup` — Check environment configuration

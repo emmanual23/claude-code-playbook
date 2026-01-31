@@ -132,3 +132,10 @@ If user says `/deps quick`:
 - Only run security audit
 - Skip outdated package listing
 - Focus on vulnerabilities only
+
+## Related Commands
+
+- `/security-check` — Broader security scan (includes code patterns)
+- `/audit` — Security and logic review
+- `/pre-release` — Full pre-deployment checklist (includes deps)
+- `/adr` — Document major version upgrade decisions

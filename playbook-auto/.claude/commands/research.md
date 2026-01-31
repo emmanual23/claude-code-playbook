@@ -103,3 +103,9 @@ If the research needs to be redone:
 ```bash
 git checkout -- docs/planning/research.md
 ```
+
+## Related Commands
+
+- `/prd` — Create product requirements (next step)
+- `/enhance` — Research enhancements to an existing product
+- `/architecture` — Technical architecture (after PRD)

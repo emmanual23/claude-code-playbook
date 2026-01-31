@@ -217,3 +217,10 @@ You can now run the full workflow:
 
 Happy building!
 ```
+
+## Related Commands
+
+- `/onboard` — Orient Claude to an existing codebase
+- `/infra` — Provision external services
+- `/research` — Start product discovery (new projects)
+- `/status` — View current project state

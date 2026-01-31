@@ -3,20 +3,23 @@
 ## Current State
 
 - **Phase:** Maintenance & Enhancement
-- **Version:** v1.1.0 (released 2026-01-29)
-- **Commands:** 23 complete
-- **E2E Review:** All 11 issues fixed
+- **Version:** v1.4.0 (released 2026-01-30)
+- **Editions:** Standard (24 commands) + Autopilot (18 commands)
+- **Archetypes:** 14 pre-built tech stacks
+- **E2E Review:** All 11 issues fixed (v1.1.0)
 
 ## What's Done
 
 - v1.0.0: Initial release with 19 commands
 - v1.1.0: Added `/infra`, `/milestone`, `/backlog`, `/setup`; fixed 21 gaps from E2E review
-- E2E review complete — all workflow chains verified, cross-references added
+- v1.2.0: Added `/enhance` command, expanded to 13 archetypes (23 commands)
+- v1.3.0: Added Autopilot Playbook (`playbook-auto/`) with `/autopilot` command, Godot Game archetype (#14)
+- v1.4.0: Design discovery Q&A in `/init-playbook` for tailored design systems
+- Post-v1.4.0: Expanded underdeveloped commands, added Related Commands to all 24 standard + 18 autopilot commands, synced editions
 
 ## Next Actions
 
-- [x] Collect enhancement ideas and prioritize them
-- [ ] Pick enhancements to implement for v1.2.0
+- [ ] Pick enhancements to implement for v1.5.0
 
 ## Backlog
 
@@ -44,3 +47,5 @@
 |------|----------|---------|
 | 2026-01-29 | Removed `/plan` command | Native Plan Mode (Shift+Tab) is better |
 | 2026-01-29 | `/fix-issue` is primary build command | Issue-driven workflow preferred over ad-hoc `/build` |
+| 2026-01-30 | Separate autopilot edition | Autonomous build is opt-in, not default |
+| 2026-01-30 | Design discovery is optional | Non-UI archetypes get N/A stub |

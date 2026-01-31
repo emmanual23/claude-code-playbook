@@ -78,6 +78,8 @@ your-project/
 3. Create `docs/design-references/` folder
 4. Fill in the PROJECT CONTEXT section of CLAUDE.md for your specific app
 
+**Tip:** See `ARCHETYPES.md` for 14 pre-built tech stack configurations you can use as a starting point.
+
 ### C. Model Strategy
 
 Configure your model strategy in Claude Code settings:
@@ -718,7 +720,7 @@ playbook/
 
 ### Changing the Tech Stack
 
-Edit the TECH STACK section in CLAUDE.md. The commands will still work.
+Edit the TECH STACK section in CLAUDE.md. The commands will still work. See `ARCHETYPES.md` for 14 pre-built configurations covering Next.js, FastAPI, React Native, Go, Django, and more.
 
 ### Changing the Design System
 

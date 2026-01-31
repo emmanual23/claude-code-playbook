@@ -102,3 +102,10 @@ If user says `/pre-release quick`:
 - Run only: tests, security-check, deps
 - Skip: design-check, documentation review
 - Report pass/fail summary
+
+## Related Commands
+
+- `/security-check` — Detailed security scan
+- `/deps` — Dependency audit
+- `/audit` — Security and logic review
+- `/design-check` — UI consistency check

@@ -61,3 +61,9 @@ When continuing:
 - Don't re-explain things already in STATUS.md
 - Pick up exactly where we left off
 - Reference specific line numbers or stages if mid-task
+
+## Related Commands
+
+- `/checkpoint` — Save progress before stepping away
+- `/status` — Quick project status check
+- `/autopilot` — Continue the autonomous build

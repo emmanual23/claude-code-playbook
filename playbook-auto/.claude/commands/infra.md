@@ -382,3 +382,9 @@ Update INFRASTRUCTURE.md with these estimates? (yes/no)
 | Auth0 | 7K MAU | $23/month |
 | Stripe | 2.9% + $0.30 | Same |
 | Resend | 3K emails/month | $20/month |
+
+## Related Commands
+
+- `/architecture` — Identifies infrastructure requirements
+- `/setup` — Check environment and configuration status
+- `/autopilot` — Start building (after infrastructure is provisioned)

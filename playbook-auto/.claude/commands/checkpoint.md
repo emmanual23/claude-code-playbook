@@ -66,3 +66,9 @@ Key context for next session:
 
 STATUS.md updated at: [timestamp]
 ```
+
+## Related Commands
+
+- `/resume-work` — Continue from last checkpoint
+- `/status` — Quick project status check
+- `/compact` — Compress context (native command)
