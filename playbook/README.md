@@ -25,12 +25,13 @@ your-project/
 ├── .claudeignore                # Files for Claude to ignore
 ├── .claude/
 │   ├── settings.json            # Hooks and permissions
-│   └── commands/                # Slash commands (23 total)
+│   └── commands/                # Slash commands (24 total)
 │       ├── research.md          # Product research
 │       ├── prd.md               # Create PRD
 │       ├── architecture.md      # Technical architecture
 │       ├── adr.md               # Architecture decision records
 │       ├── enhance.md           # Research & plan enhancements
+│       ├── plan.md              # Plan features with assumption checking
 │       ├── roadmap.md           # Create roadmap
 │       ├── sprint.md            # Create GitHub issues from roadmap
 │       ├── infra.md             # Provision infrastructure
@@ -79,7 +80,7 @@ your-project/
 
 ### C. Model Strategy
 
-Run `/model` in Claude Code and select:
+Configure your model strategy in Claude Code settings:
 
 **"Use Opus 4.5 in plan mode, Sonnet 4.5 otherwise"**
 
@@ -594,6 +595,7 @@ Each enabled MCP server consumes context. Use `/mcp` to manage.
 | Create milestone roadmap | `/roadmap` |
 | Create GitHub issues from roadmap | `/sprint` |
 | Research & plan an enhancement | `/enhance` |
+| Plan a feature (with assumption checking) | `/plan` |
 | Provision external services | `/infra` |
 
 ### Build Phase
@@ -670,6 +672,7 @@ playbook/
 │       ├── architecture.md      # Technical architecture
 │       ├── adr.md               # Architecture decision records
 │       ├── enhance.md           # Research & plan enhancements
+│       ├── plan.md              # Plan features with assumption checking
 │       ├── roadmap.md           # Milestone planning
 │       ├── sprint.md            # Create GitHub issues from roadmap
 │       ├── infra.md             # Provision infrastructure

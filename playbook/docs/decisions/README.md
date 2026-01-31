@@ -45,9 +45,11 @@ Run `/adr` in Claude Code to create a new decision record.
 
 Or manually:
 1. Copy the template below
-2. Create `ADR-[NUMBER]-[short-title].md`
+2. Create `ADR-[NUMBER]-[short-title].md` (e.g., `ADR-001-use-postgresql.md`, `ADR-002-jwt-authentication.md`)
 3. Fill in all sections
 4. Update this index
+
+> **Naming convention:** Use zero-padded three-digit numbers (ADR-001, ADR-002, ...) and lowercase kebab-case titles.
 
 ## Template
 

@@ -5,6 +5,8 @@
 **Active Work:** None
 **Last Updated:** [DATE]
 
+> **Update frequency:** Update this file after every milestone, significant session, or when active work changes. Run `/checkpoint` before stepping away.
+
 ## Progress
 
 ### Discovery

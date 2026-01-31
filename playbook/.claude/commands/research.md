@@ -95,6 +95,12 @@ Update `docs/planning/STATUS.md`:
 Present a brief summary of findings.
 Ask: "Ready to proceed? Next: `/prd`"
 
+## Related Commands
+
+- `/prd` — Create product requirements (next step)
+- `/enhance` — Research enhancements to an existing product
+- `/architecture` — Technical architecture (after PRD)
+
 ---
 
 ## Rollback

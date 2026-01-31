@@ -6,6 +6,13 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.4.0] - 2026-01-30
+
+### Added
+- **Design discovery Q&A** — Optional Question 4 in `/init-playbook` researches your market, competitors, and audience to generate a tailored design system. Choose default or custom. Non-UI archetypes get an N/A stub. Enforced automatically across all UI work (`/build`, `/fix-issue`, `/design-check`, `/pre-release`).
+
+---
+
 ## [1.3.0] - 2026-01-30
 
 ### Added
@@ -34,7 +41,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 - **Archetype selection UX** — Beginner-friendly category funnel with plain-English descriptions replaces flat 14-option list; expert shortcut to name stack directly
 - **Updated 6 existing archetypes** — NestJS replaces Express, uv replaces pip, Maestro replaces Detox, picocolors replaces chalk, Zustand as default, Fly.io added
-- **Command count** — Updated from 22 to 23 across README, CHEATSHEET, and init-playbook
+- **Command count** — Updated from 22 to 23 across README, CHEATSHEET, and init-playbook (24 with `/plan`)
 
 ---
 
@@ -158,6 +165,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 | Version | Date | Summary |
 |---------|------|---------|
+| 1.4.0 | 2026-01-30 | Design discovery Q&A in `/init-playbook` — optional tailored design system |
 | 1.3.0 | 2026-01-30 | Added Autopilot Playbook (`playbook-auto/`) with `/autopilot` command |
 | 1.2.0 | 2026-01-30 | Added `/enhance` command, 13 archetypes (23 commands) |
 | 1.1.0 | 2026-01-29 | Added `/infra`, `/milestone`, `/backlog`, `/setup`; fixed 21 gaps |

@@ -101,8 +101,7 @@ If violations found, ask: "Want me to fix these violations?"
 ## Related Commands
 
 - `/audit` — Security and logic review
-- `/build` — Staged build with design system enforcement
-- `/fix-issue` — Implements issues with design system compliance
+- `/autopilot` — Autonomous build orchestrator
 - `/pre-release` — Full pre-deployment checklist (includes design check)
 
 ## Rollback

@@ -277,6 +277,13 @@ Ask: "Ready to proceed? Next: `/roadmap`"
 
 ⚠️ **Reminder:** Infrastructure must be provisioned before building. Run `/infra` before `/fix-issue 1`.
 
+## Related Commands
+
+- `/prd` — Product requirements (input to architecture)
+- `/roadmap` — Create milestones from architecture
+- `/adr` — Document significant architecture decisions
+- `/infra` — Provision infrastructure identified here
+
 ---
 
 ## Rollback

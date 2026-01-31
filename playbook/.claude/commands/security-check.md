@@ -100,6 +100,13 @@ Present findings as:
 
 3. Update STATUS.md with security check results
 
+## Related Commands
+
+- `/audit` — Security and logic review (code-level)
+- `/deps` — Dependency audit for known vulnerabilities
+- `/pre-release` — Full pre-deployment checklist
+- `/setup` — Check environment configuration
+
 ## Quick Check Mode
 
 If user says "quick security check":

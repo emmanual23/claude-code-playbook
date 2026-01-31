@@ -104,6 +104,13 @@ Update `docs/planning/STATUS.md`:
 Present the feature list.
 Ask: "Ready to proceed? Next: `/architecture`"
 
+## Related Commands
+
+- `/research` — Market research (input to PRD)
+- `/architecture` — Technical architecture (next step)
+- `/enhance` — Plan enhancements to an existing product
+- `/challenge` — Surface ambiguity in requirements
+
 ---
 
 ## Rollback

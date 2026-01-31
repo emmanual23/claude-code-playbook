@@ -96,6 +96,13 @@ If ready to ship:
 1. Ask: "Ready to create release commit/tag?"
 2. If yes, suggest version number based on changes (major/minor/patch)
 
+## Related Commands
+
+- `/security-check` — Detailed security scan
+- `/deps` — Dependency audit
+- `/audit` — Security and logic review
+- `/design-check` — UI consistency check
+
 ## Quick Mode
 
 If user says `/pre-release quick`:

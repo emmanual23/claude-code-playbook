@@ -126,6 +126,13 @@ npm audit fix --force
 - Add critical vulnerabilities to tech debt if not fixable immediately
 - Document major version upgrade decisions with `/adr`
 
+## Related Commands
+
+- `/security-check` — Broader security scan (includes code patterns)
+- `/audit` — Security and logic review
+- `/pre-release` — Full pre-deployment checklist (includes deps)
+- `/adr` — Document major version upgrade decisions
+
 ## Quick Mode
 
 If user says `/deps quick`:

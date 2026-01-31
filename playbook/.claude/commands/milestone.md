@@ -118,3 +118,10 @@ Next: Run `/fix-issue [A]`
 /milestone 2
 ```
 → Transition directly to Milestone 2
+
+## Related Commands
+
+- `/sprint` — Create GitHub issues for the next milestone
+- `/fix-issue` — Implement issues in the new milestone
+- `/status` — View current project state
+- `/backlog` — See what's ready to build vs. needs definition

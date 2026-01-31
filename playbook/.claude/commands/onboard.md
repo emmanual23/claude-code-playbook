@@ -71,3 +71,10 @@ If STATUS.md was created or exists:
 
 If infrastructure was identified:
 → Suggest: "Run `/infra status` to check service connectivity"
+
+## Related Commands
+
+- `/status` — View current project state
+- `/setup` — Check environment and configuration
+- `/resume-work` — Continue from a previous session
+- `/backlog` — See what's ready to build

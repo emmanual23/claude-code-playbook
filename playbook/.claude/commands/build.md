@@ -99,6 +99,13 @@ Ask: "Were any shortcuts or workarounds taken during this implementation?"
   - How to properly fix it later
   - Priority level
 
+## Related Commands
+
+- `/fix-issue` — Implement a GitHub issue (preferred over ad-hoc builds)
+- `/design-check` — Verify UI matches design system after building
+- `/audit` — Security and logic review after building
+- `/checkpoint` — Save progress mid-session
+
 ## Rollback
 
 If something goes wrong, you can rollback to any stage:

@@ -208,6 +208,13 @@ Not every issue needs all stages:
 
 State which stages apply before starting, and get approval.
 
+## Related Commands
+
+- `/sprint` — Create GitHub issues from roadmap
+- `/milestone` — Transition to next milestone when all issues are done
+- `/build` — Ad-hoc builds (when no issue exists)
+- `/design-check` — Verify UI after implementation
+
 ## Rollback
 
 If something goes wrong at any stage:

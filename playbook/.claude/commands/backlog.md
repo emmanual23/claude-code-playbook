@@ -168,3 +168,10 @@ Feature: [Name]
 
 Missing any? Let's fill them in.
 ```
+
+## Related Commands
+
+- `/sprint` — Create GitHub issues from roadmap
+- `/fix-issue` — Implement a ready feature
+- `/status` — View current project state
+- `/enhance` — Research and plan a new enhancement
