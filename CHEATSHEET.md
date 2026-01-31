@@ -15,7 +15,7 @@
 | `/sprint` | Generate GitHub issues from roadmap |
 | `/infra` | Provision external services (databases, APIs, hosting) |
 
-### Build (8)
+### Build (9)
 | Command | Purpose |
 |---------|---------|
 | `/fix-issue [#]` | **Implement GitHub issue** ⭐ Primary |
@@ -26,6 +26,7 @@
 | `/audit` | Review security, logic, accessibility |
 | `/design-check` | Verify UI matches design system |
 | `/pre-release` | Pre-deployment checklist |
+| `/deploy` | Merge PRs, deploy, verify production |
 
 ### Session (4)
 | Command | Purpose |
@@ -79,7 +80,7 @@
 
 ### Before Shipping
 ```
-/security-check → /deps → /audit → /design-check → /pre-release
+/security-check → /deps → /audit → /design-check → /pre-release → /deploy
 ```
 
 ---
@@ -133,7 +134,7 @@
 | Secret detected | `/security-check`, fix now |
 | Vulnerable dependency | `/deps`, fix or log debt |
 | Taking shortcut | Log in `TECH-DEBT.md` |
-| Before deploy | `/pre-release` |
+| Before deploy | `/pre-release` → `/deploy` |
 
 ---
 

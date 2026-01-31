@@ -11,7 +11,26 @@ Use this command when you've completed a milestone and are ready to start the ne
 2. Read `docs/planning/roadmap.md` - identify next milestone
 3. Verify all issues from current milestone are closed
 
-## Step 1: Verify Completion
+## Step 1: Check Deployment Status
+
+Before transitioning milestones, check if the current milestone has been deployed:
+
+If `docs/planning/STATUS.md` does NOT show a deployment record for the current milestone:
+```
+⚠️ MILESTONE NOT DEPLOYED
+===========================
+
+Milestone [N] issues are complete, but it hasn't been deployed yet.
+
+Recommended sequence: `/pre-release` → `/deploy` → `/milestone`
+
+1. Run `/pre-release` now
+2. Skip deployment and transition anyway
+3. Cancel
+```
+→ Wait for user choice. If they choose option 2, proceed with a note in STATUS.md.
+
+## Step 2: Verify Completion
 
 Check current milestone status:
 ```bash
@@ -33,13 +52,13 @@ Complete these issues first, or move them to next milestone?
 3. Cancel
 ```
 
-## Step 2: Close Milestone (if all issues done)
+## Step 3: Close Milestone (if all issues done)
 
 ```bash
 gh api repos/{owner}/{repo}/milestones/{milestone_number} -X PATCH -f state="closed"
 ```
 
-## Step 3: Identify Next Milestone
+## Step 4: Identify Next Milestone
 
 From roadmap.md, find the next milestone:
 
@@ -55,7 +74,7 @@ MILESTONE TRANSITION
    Features: [List from roadmap]
 ```
 
-## Step 4: Create Issues for Next Milestone
+## Step 5: Create Issues for Next Milestone
 
 If GitHub issues don't exist for next milestone, offer to create them:
 
@@ -68,7 +87,7 @@ If GitHub issues don't exist for next milestone, offer to create them:
 gh issue list --milestone "[Next Milestone Name]" --state open
 ```
 
-## Step 5: Update Status
+## Step 6: Update Status
 
 Update `docs/planning/STATUS.md`:
 - Mark previous milestone complete with date
@@ -80,7 +99,7 @@ Update `docs/planning/roadmap.md`:
 - Previous milestone status: ✅ Complete
 - Current milestone status: 🔄 In Progress
 
-## Step 6: Summary
+## Step 7: Summary
 
 ```
 ✅ MILESTONE [N] COMPLETE
@@ -121,6 +140,7 @@ Next: Run `/fix-issue [A]`
 
 ## Related Commands
 
+- `/deploy` — Deploy the milestone before transitioning
 - `/sprint` — Create GitHub issues for the next milestone
 - `/fix-issue` — Implement issues in the new milestone
 - `/status` — View current project state

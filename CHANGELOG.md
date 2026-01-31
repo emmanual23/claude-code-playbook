@@ -6,6 +6,19 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.5.0] - 2026-01-31
+
+### Added
+- **`/deploy` command** — Guides through merging PRs, pushing to production, running database migrations (auto-detects Supabase/Prisma/Drizzle), verifying environment variables, checking deployment health, and rolling back if needed. Fills the gap between `/pre-release` (checklist) and actual deployment. Added to both standard and autopilot editions.
+
+### Changed
+- **`/milestone`** — Now checks if the milestone was deployed before transitioning. Suggests `/pre-release` → `/deploy` → `/milestone` sequence.
+- **`/fix-issue`** — PR creation step now notes that PRs are merged during `/deploy`. Milestone complete message updated to reference `/pre-release` → `/deploy` → `/milestone`.
+- **Workflow chain** — Updated from `/fix-issue (loop) → /milestone` to `/fix-issue (loop) → /pre-release → /deploy → /milestone`
+- **Command count** — Updated from 24 to 25 (standard), 18 to 19 (autopilot)
+
+---
+
 ## [1.4.0] - 2026-01-30
 
 ### Added
@@ -165,6 +178,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 | Version | Date | Summary |
 |---------|------|---------|
+| 1.5.0 | 2026-01-31 | Added `/deploy` command — deployment guide with PR merge, migrations, verification |
 | 1.4.0 | 2026-01-30 | Design discovery Q&A in `/init-playbook` — optional tailored design system |
 | 1.3.0 | 2026-01-30 | Added Autopilot Playbook (`playbook-auto/`) with `/autopilot` command |
 | 1.2.0 | 2026-01-30 | Added `/enhance` command, 13 archetypes (23 commands) |

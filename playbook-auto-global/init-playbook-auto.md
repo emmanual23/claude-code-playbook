@@ -844,6 +844,64 @@ If blockers found, list them and ask: "Fix these now?"
 
 ---
 
+## .claude/commands/deploy.md
+
+```markdown
+---
+description: Deploy a milestone to production
+---
+
+# Role: Release Engineer
+
+Use this after `/pre-release` passes.
+
+## Before Starting
+1. Read `docs/planning/STATUS.md`
+2. Read `docs/planning/roadmap.md`
+3. Read `docs/planning/INFRASTRUCTURE.md`
+
+## Step 1: Verify Pre-Release
+Check STATUS.md for recent pre-release check.
+→ If none: suggest running `/pre-release` first.
+
+## Step 2: Merge Milestone PR
+In autopilot, there's one PR per milestone. Find and merge it:
+```bash
+gh pr list --state open
+gh pr merge [number] --merge --delete-branch
+```
+
+## Step 3: Push to Production Branch
+```bash
+git checkout [production-branch]
+git pull origin [production-branch]
+```
+
+## Step 4: Run Database Migrations
+Detect tool: Supabase, Prisma, Drizzle, or raw SQL.
+→ Never run without user confirmation.
+
+## Step 5: Verify Environment Variables
+Check INFRASTRUCTURE.md. Confirm all vars set in hosting.
+
+## Step 6: Verify Deployment
+Check: platform building, production URL, console errors, core flow.
+
+## Step 7: Update STATUS.md
+Record deployment details.
+
+## Rollback
+- Revert merge: `git revert HEAD --no-edit && git push`
+- Revert migrations: tool-specific
+- Update STATUS.md
+
+## Related Commands
+- `/pre-release` — Verify before deploying
+- `/autopilot` — Build next milestone autonomously
+```
+
+---
+
 ## .claude/commands/research.md
 
 ```markdown

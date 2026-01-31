@@ -945,6 +945,68 @@ If blockers found, list them and ask: "Fix these now?"
 
 ---
 
+## .claude/commands/deploy.md
+
+```markdown
+---
+description: Deploy a milestone to production
+---
+
+# Role: Release Engineer
+
+Use this after `/pre-release` passes.
+
+## Before Starting
+1. Read `docs/planning/STATUS.md`
+2. Read `docs/planning/roadmap.md`
+3. Read `docs/planning/INFRASTRUCTURE.md`
+
+## Step 1: Verify Pre-Release
+Check STATUS.md for recent pre-release check.
+→ If none: suggest running `/pre-release` first.
+
+## Step 2: Merge Open PRs
+```bash
+gh pr list --state open
+```
+Show PRs and ask for confirmation before merging each:
+```bash
+gh pr merge [number] --merge --delete-branch
+```
+
+## Step 3: Push to Production Branch
+```bash
+git remote show origin | grep "HEAD branch"
+git checkout [production-branch]
+git pull origin [production-branch]
+```
+
+## Step 4: Run Database Migrations
+Detect tool: Supabase (`supabase db push`), Prisma (`npx prisma migrate deploy`), Drizzle (`npx drizzle-kit push`), or raw SQL.
+→ Never run without user confirmation.
+
+## Step 5: Verify Environment Variables
+Check INFRASTRUCTURE.md for required vars. Confirm all are set in hosting platform.
+
+## Step 6: Verify Deployment
+Ask user to check: platform building, production URL works, no console errors, core flow works.
+
+## Step 7: Update STATUS.md
+Record: milestone deployed, date, PRs merged, migrations run.
+
+## Rollback
+- Revert merge: `git revert HEAD --no-edit && git push`
+- Revert migrations: tool-specific instructions
+- Update STATUS.md with rollback record
+
+## Related Commands
+- `/pre-release` — Verify before deploying
+- `/milestone` — Transition to next milestone after deployment
+- `/fix-issue` — PRs are merged during deploy
+```
+
+---
+
 ## .claude/commands/fix-issue.md
 
 ```markdown

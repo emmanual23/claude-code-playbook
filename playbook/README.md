@@ -25,7 +25,7 @@ your-project/
 ├── .claudeignore                # Files for Claude to ignore
 ├── .claude/
 │   ├── settings.json            # Hooks and permissions
-│   └── commands/                # Slash commands (24 total)
+│   └── commands/                # Slash commands (25 total)
 │       ├── research.md          # Product research
 │       ├── prd.md               # Create PRD
 │       ├── architecture.md      # Technical architecture
@@ -43,6 +43,7 @@ your-project/
 │       ├── deps.md              # Dependency audit
 │       ├── design-check.md      # UI consistency check
 │       ├── pre-release.md       # Pre-release checklist
+│       ├── deploy.md            # Deploy milestone to production
 │       ├── status.md            # View/update project status
 │       ├── backlog.md           # View ready vs. undefined features
 │       ├── checkpoint.md        # Save progress mid-session
@@ -415,10 +416,10 @@ When all issues in a milestone are done, `/fix-issue` will detect it:
 🎉 MILESTONE 1 COMPLETE!
 All issues in Milestone 1 are now closed.
 
-Next: Run `/milestone` to start Milestone 2
+Next: Run `/pre-release` → `/deploy` → `/milestone`
 ```
 
-Then run `/milestone`:
+Then run `/pre-release` to verify, `/deploy` to ship, and `/milestone` to transition:
 
 ```
 Type: /milestone
@@ -491,7 +492,7 @@ These are built-in commands — learn them, they're powerful:
 | Hardcoded secret detected | Run `/security-check`, fix immediately |
 | Dependency vulnerability found | Run `/deps`, fix critical issues or log to tech debt |
 | Taking a shortcut | Log in `TECH-DEBT.md` with remediation plan |
-| Before deploying | Run `/pre-release` to verify everything is ready |
+| Before deploying | Run `/pre-release` then `/deploy` |
 
 ---
 
@@ -610,6 +611,7 @@ Each enabled MCP server consumes context. Use `/mcp` to manage.
 | Security scan (shift-left) | `/security-check` |
 | Audit dependencies | `/deps` |
 | Pre-release checklist | `/pre-release` |
+| Deploy milestone to production | `/deploy` |
 
 ### Session Management
 | Goal | Command |
@@ -687,6 +689,7 @@ playbook/
 │       ├── deps.md              # Dependency audit
 │       ├── design-check.md      # UI consistency check
 │       ├── pre-release.md       # Pre-release checklist
+│       ├── deploy.md            # Deploy milestone to production
 │       │
 │       │── # Session Management
 │       ├── status.md            # View/update project status

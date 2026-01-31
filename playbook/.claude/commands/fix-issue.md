@@ -135,6 +135,8 @@ gh pr create --title "[description]" --body "Fixes #[issue-number]
 "
 ```
 
+> **Note:** PR created but not merged. PRs are merged during `/deploy` when the milestone is ready for production.
+
 ## Step 6: Tech Debt Check
 Ask: "Were any shortcuts or workarounds taken?"
 → If yes, add entry to `docs/planning/TECH-DEBT.md`
@@ -165,7 +167,7 @@ PR created: #[pr-number]
 ==========================
 All issues in Milestone [X] are now closed.
 
-Next: Run `/milestone` to start Milestone [X+1]
+Next: Run `/pre-release` → `/deploy` → `/milestone`
 ```
 → Stop here. Don't suggest issues from other milestones.
 
@@ -212,6 +214,7 @@ State which stages apply before starting, and get approval.
 
 - `/sprint` — Create GitHub issues from roadmap
 - `/milestone` — Transition to next milestone when all issues are done
+- `/deploy` — Merge PRs and deploy milestone to production
 - `/build` — Ad-hoc builds (when no issue exists)
 - `/design-check` — Verify UI after implementation
 

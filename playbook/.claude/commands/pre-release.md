@@ -98,6 +98,7 @@ If ready to ship:
 
 ## Related Commands
 
+- `/deploy` — Deploy to production after this check passes
 - `/security-check` — Detailed security scan
 - `/deps` — Dependency audit
 - `/audit` — Security and logic review

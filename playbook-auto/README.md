@@ -13,7 +13,7 @@ A workflow system for building apps with Claude Code featuring **guided discover
 | Decisions | Claude asks you | Claude decides + logs ADR |
 | PRs | One per issue | One per milestone |
 | Branching | One branch per issue | One branch per milestone |
-| Commands | 23 total | 18 total (no build/fix-issue/sprint/milestone/backlog/challenge) |
+| Commands | 25 total | 19 total (no build/fix-issue/sprint/milestone/backlog/challenge) |
 
 ---
 
