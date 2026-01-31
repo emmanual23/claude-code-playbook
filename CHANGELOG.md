@@ -6,6 +6,25 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.3.0] - 2026-01-30
+
+### Added
+- **Godot Game archetype** — Archetype 14 for desktop/cross-platform game development with Godot 4, GDScript, GUT testing (14 total archetypes)
+- **Autopilot Playbook (`playbook-auto/`)** — A separate version of the playbook where discovery is guided but build is fully autonomous. After roadmap approval, `/autopilot` runs sprint planning, implementation, testing, and PR creation without stopping.
+- **`/autopilot` command** — Autonomous build orchestrator: pre-flight checks, sprint planning, build loop (data → logic → UI → tests), milestone PR creation, and final report. Handles failures with 3 retries per stage, skips blockers, and logs all decisions as ADRs.
+- **`playbook-auto-global/` installer** — `init-playbook-auto.md` with PowerShell and shell installer scripts for the autopilot edition.
+- **`playbook-auto/README.md`** — Documents the two-phase workflow (guided discovery → autonomous build), prerequisites, failure handling, and command reference.
+
+### Design Decisions
+- **Approval boundary:** After `/roadmap`. Everything post-roadmap is autonomous.
+- **Ambiguity handling:** Claude makes the best choice and logs it as an ADR. Never pauses to ask.
+- **Infrastructure:** Must be fully provisioned (all services 🟢) before autopilot starts.
+- **Branching:** One branch per milestone, one PR per milestone.
+- **Coverage threshold:** Soft (60% warn, not block) to avoid meaningless test generation.
+- **Commands excluded from autopilot:** `/build`, `/fix-issue`, `/sprint`, `/milestone`, `/backlog`, `/challenge` — all replaced by `/autopilot`.
+
+---
+
 ## [1.2.0] - 2026-01-30
 
 ### Added
@@ -13,6 +32,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **5 new project archetypes** — AI/LLM App, Go + Gin, Django + HTMX, Hono Edge/Serverless, Flutter Mobile (13 total)
 
 ### Changed
+- **Archetype selection UX** — Beginner-friendly category funnel with plain-English descriptions replaces flat 14-option list; expert shortcut to name stack directly
 - **Updated 6 existing archetypes** — NestJS replaces Express, uv replaces pip, Maestro replaces Detox, picocolors replaces chalk, Zustand as default, Fly.io added
 - **Command count** — Updated from 22 to 23 across README, CHEATSHEET, and init-playbook
 
@@ -138,6 +158,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 | Version | Date | Summary |
 |---------|------|---------|
+| 1.3.0 | 2026-01-30 | Added Autopilot Playbook (`playbook-auto/`) with `/autopilot` command |
 | 1.2.0 | 2026-01-30 | Added `/enhance` command, 13 archetypes (23 commands) |
 | 1.1.0 | 2026-01-29 | Added `/infra`, `/milestone`, `/backlog`, `/setup`; fixed 21 gaps |
 | 1.0.0 | 2026-01-29 | Initial release with 19 commands |

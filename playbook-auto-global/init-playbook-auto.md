@@ -1,5 +1,5 @@
 ---
-description: Initialize or update the Claude Code playbook in any project
+description: Initialize or update the Claude Code playbook (autopilot edition) in any project
 ---
 
 # Role: Project Scaffolder
@@ -145,7 +145,7 @@ fi
 
 Created:
 - CLAUDE.md (project constitution)
-- 23 slash commands in .claude/commands/
+- 18 slash commands in .claude/commands/
 - .claudeignore (files for Claude to skip)
 - .claude/settings.json (hooks configuration)
 - GitHub workflow and issue templates
@@ -181,7 +181,7 @@ WORKFLOW READINESS
    
 [If GitHub MCP not configured:]
 ⚠️ BLOCKED (needs GitHub MCP):
-   /sprint → /fix-issue
+   /autopilot
    
 [If test/lint missing:]
 ⚠️ PARTIALLY READY (needs test/lint scripts):
@@ -503,10 +503,11 @@ NOT: flashy, playful, marketing-heavy, or consumer-app aesthetic.
 ## 10. QUICK REFERENCE
 
 ### Commands Available
-**Discovery:** `/research`, `/prd`, `/architecture`, `/adr`, `/roadmap`, `/sprint`, `/enhance`
-**Build:** `/build`, `/fix-issue`, `/audit`, `/security-check`, `/deps`, `/design-check`, `/pre-release`
+**Discovery:** `/research`, `/prd`, `/architecture`, `/adr`, `/roadmap`, `/enhance`
+**Autonomous Build:** `/autopilot`
+**Quality:** `/audit`, `/security-check`, `/deps`, `/design-check`, `/pre-release`
 **Session:** `/status`, `/checkpoint`, `/resume-work`
-**Utility:** `/onboard`, `/challenge`
+**Utility:** `/setup`, `/infra`, `/onboard`
 
 **Native Commands:** `/clear`, `/compact`, `/resume`, `/rewind`, `/model`, `Shift+Tab` (Plan Mode)
 
@@ -517,88 +518,6 @@ NOT: flashy, playful, marketing-heavy, or consumer-app aesthetic.
 - `docs/planning/architecture.md` - Technical structure
 - `docs/planning/roadmap.md` - Implementation plan
 - `docs/decisions/` - Architecture Decision Records
-```
-
----
-
-## .claude/commands/build.md
-
-```markdown
----
-description: Build a feature without a GitHub issue (ad-hoc)
----
-
-# Role: Engineer
-
-**When to use this command:**
-- Quick prototypes or explorations
-- Projects not using GitHub issues
-- Ad-hoc requests during a conversation
-- Small unplanned additions
-
-**For issue-driven development, use `/fix-issue` instead.**
-
-## Before Starting
-1. Read `docs/planning/STATUS.md` - update Active Work
-2. Read `CLAUDE.md` for project constraints and design system
-3. Read `docs/planning/prd.md` if it exists (for product context)
-4. Read `docs/planning/architecture.md` if it exists (for technical structure)
-5. Use **Plan Mode** (Shift+Tab) first if uncertain about approach
-
-## Build Process
-
-Execute in stages. STOP after each stage and wait for "proceed."
-Commit after each stage to enable rollback.
-
-**Stage 1 - Data:**
-Show proposed schema/database changes. Explain why.
-→ Wait for "proceed"
-→ Commit: `git commit -m "feat(data): [description]"`
-→ Update STATUS.md: "Stage 1 (Data) complete"
-
-**Stage 2 - Logic:**
-Show the core function or API route. Explain the logic.
-→ Wait for "proceed"
-→ Commit: `git commit -m "feat(logic): [description]"`
-→ Update STATUS.md: "Stage 2 (Logic) complete"
-
-**Stage 3 - UI:**
-Implement the interface following DESIGN SYSTEM rules in CLAUDE.md.
-Before showing me the result, verify:
-- Colors within approved palette?
-- Typography hierarchy correct?
-- Spacing consistent with 4px grid?
-- No forbidden patterns?
-
-Show the component and confirm design compliance.
-→ Wait for "proceed"
-→ Commit: `git commit -m "feat(ui): [description]"`
-→ Update STATUS.md: "Stage 3 (UI) complete"
-
-**Stage 4 - Unit/Integration Tests:**
-Write tests that verify expected behavior of functions and APIs.
-→ Wait for "proceed"
-→ Commit: `git commit -m "test(unit): [description]"`
-→ Update STATUS.md: "Stage 4 (Unit Tests) complete"
-
-**Stage 5 - E2E Tests (if UI changed):**
-If Stage 3 was executed, write or update E2E tests for affected user flows.
-→ If no UI change, state "Skipping E2E - no UI changes" and proceed
-→ Wait for "proceed"
-→ Commit: `git commit -m "test(e2e): [description]"`
-→ Update STATUS.md: "Stage 5 (E2E) complete"
-
-**Stage 6 - Verify:**
-Run lint, unit tests, and E2E tests. Report results.
-→ If passing, final commit: `git commit -m "feat: [complete feature description]"`
-→ Update STATUS.md: Move to "Recently Completed", set next action
-
-**Stage 7 - Tech Debt Check:**
-Ask: "Were any shortcuts or workarounds taken?"
-→ If yes, add entry to `docs/planning/TECH-DEBT.md`
-
-## Rollback
-If something goes wrong: `git log --oneline` then `git reset --hard <commit>`
 ```
 
 ---
@@ -841,26 +760,6 @@ description: Get Claude up to speed on an existing codebase
 
 ---
 
-## .claude/commands/challenge.md
-
-```markdown
----
-description: Surface ambiguity in vague requests
----
-
-# Role: Requirements Analyst
-
-Before I build anything, challenge my request:
-
-1. List what's ambiguous or underspecified
-2. Identify assumptions you'd have to make
-3. Ask clarifying questions (one at a time)
-4. Summarize the clarified requirements
-5. Wait for my confirmation before proceeding
-```
-
----
-
 ## .claude/commands/design-check.md
 
 ```markdown
@@ -974,109 +873,6 @@ READY TO DEPLOY ✅
 ```
 
 If blockers found, list them and ask: "Fix these now?"
-```
-
----
-
-## .claude/commands/fix-issue.md
-
-```markdown
----
-description: Implement a GitHub issue with staged builds
----
-
-# Role: Engineer
-
-This is the **primary build command** when following the playbook workflow.
-
-## Before Starting
-1. Read `docs/planning/STATUS.md` - update Active Work to this issue
-2. Read `CLAUDE.md` for project constraints and design system
-3. Read `docs/planning/prd.md` if it exists
-4. Read `docs/planning/architecture.md` if it exists
-5. Read `docs/planning/roadmap.md` if it exists
-6. Read `docs/planning/INFRASTRUCTURE.md` if it exists - check for 🔴 items
-
-## Step 0: Validate Prerequisites
-
-**Check 1 - Issue Number:**
-If `$ARGUMENTS` is empty:
-→ List open issues with `gh issue list --state open --limit 10`
-→ Ask which issue to work on
-→ Wait for number before proceeding
-
-**Check 2 - Infrastructure:**
-If `INFRASTRUCTURE.md` has any 🔴 items:
-→ Warn user, offer: (1) Run `/infra`, (2) Continue anyway, (3) Cancel
-
-**Check 3 - GitHub CLI:**
-If `gh auth status` fails:
-→ Stop and suggest `gh auth login` or `/setup`
-
-## Step 1: Read the Issue
-Run `gh issue view $ARGUMENTS`
-
-Update STATUS.md:
-- Active Work: "Implementing #[number]: [title]"
-- Phase: Build
-
-## Step 2: Plan
-- Summarize what the issue asks for
-- Cross-reference with PRD and architecture
-- Identify files needing changes
-- List assumptions
-- Propose implementation approach
-
-→ Wait for "proceed"
-
-## Step 3: Create Branch
-`git checkout -b feat/[issue-number]-[short-description]`
-
-## Step 4: Staged Build
-Execute in stages. STOP after each and wait for "proceed."
-
-**Stage 4.1 - Data:** Schema changes
-→ Wait → Commit: `git commit -m "feat(data): [desc] (#[num])"`
-
-**Stage 4.2 - Logic:** Core implementation
-→ Wait → Commit: `git commit -m "feat(logic): [desc] (#[num])"`
-
-**Stage 4.3 - UI:** Interface (verify design system)
-→ Wait → Commit: `git commit -m "feat(ui): [desc] (#[num])"`
-
-**Stage 4.4 - Unit/Integration Tests:** Function and API tests
-→ Wait → Commit: `git commit -m "test(unit): [desc] (#[num])"`
-
-**Stage 4.5 - E2E Tests (if UI changed):** User flow tests
-→ Skip if no UI change → Commit: `git commit -m "test(e2e): [desc] (#[num])"`
-
-**Stage 4.6 - Verify:** Run lint, unit tests, E2E tests
-→ Wait for "proceed"
-
-## Step 5: Create PR
-`gh pr create --title "[description]" --body "Fixes #[issue-number]"`
-
-## Step 6: Tech Debt Check
-Ask: "Were any shortcuts taken?"
-→ If yes, add to `docs/planning/TECH-DEBT.md`
-
-## Step 7: Update Status
-Move issue to "Recently Completed" in STATUS.md
-
-## Step 8: Suggest Next Issue
-Run `gh issue list --state open --limit 5`
-
-Present:
-✅ ISSUE #[N] COMPLETE
-PR created: #[pr-number]
-
-📋 NEXT ISSUES:
-1. #[X] - [Title] (recommended)
-2. #[Y] - [Title]
-
-Ready to start #[X]? Say "next" or specify issue number.
-
-If "next" → Run `/fix-issue [number]` automatically
 ```
 
 ---
@@ -1468,107 +1264,6 @@ Present milestones. Ask: "Ready to create GitHub issues?"
 
 ---
 
-## .claude/commands/sprint.md
-
-```markdown
----
-description: Create GitHub issues from roadmap
----
-
-# Role: Sprint Planner
-
-## Before Starting
-1. Read `docs/planning/STATUS.md`
-2. Read `docs/planning/roadmap.md` - stop if missing
-3. Read `docs/planning/prd.md` for context
-4. Read `docs/planning/INFRASTRUCTURE.md` - note any 🔴 items
-5. Update STATUS.md: "Phase: Sprint Planning"
-
-## Sprint Process
-
-**Step 0 - Check Infrastructure**
-If INFRASTRUCTURE.md has any 🔴 services, create infrastructure issue first:
-
-```
-Title: [Infra]: Provision infrastructure prerequisites
-
-## Required Services
-- [ ] [Service 1] - [Purpose]
-- [ ] [Service 2] - [Purpose]
-
-## Steps
-Run `/infra` for guided setup.
-
-## Acceptance Criteria
-- [ ] All services in INFRASTRUCTURE.md marked 🟢
-- [ ] All env vars added to .env.local
-```
-
-Labels: `infrastructure`, `blocker`
-
-**Step 1 - Select Milestone**
-If not specified in $ARGUMENTS, ask which milestone.
-
-**Step 2 - Confirm**
-List tasks for that milestone.
-"I'll create [X] GitHub issues. Proceed?"
-
-**Step 3 - Create Issues**
-For each task, run `gh issue create`:
-
-```
-Title: [Feature]: [Task]
-
-## Context
-Part of: Milestone [X]
-Feature: [Name]
-
-## Description
-[What needs to be done]
-
-## Acceptance Criteria
-- [ ] [Criterion 1]
-- [ ] [Criterion 2]
-- [ ] Tests pass
-
-## Technical Notes
-- Complexity: [Low/Medium/High]
-- Dependencies: [Blocking issues, including infra if created]
-```
-
-**Step 4 - Update Roadmap**
-Add issue numbers to roadmap.md tasks.
-
-**Step 5 - Update Status**
-STATUS.md:
-- Phase: Build
-- List created issues
-- Next: /infra (if infra needed) or /fix-issue [first issue]
-
-**Step 6 - Summary**
-If infrastructure needed:
-```
-⚠️ INFRASTRUCTURE REQUIRED FIRST
-
-#1: [Infra]: Provision infrastructure ← Run /infra
-
-Then:
-#2: [Task] (depends on #1)
-#3: [Task] (depends on #1)
-```
-
-If no infrastructure:
-```
-Created [X] issues for Milestone 1:
-- #12: [Task]
-- #13: [Task]
-
-Start with: /fix-issue 12
-```
-```
-
----
-
 ## .claude/commands/enhance.md
 
 ```markdown
@@ -1579,6 +1274,277 @@ description: Research and plan an enhancement to an existing product
 # Role: Product Iterator
 
 Use this command when you have an enhancement idea for a product that's already built and you want to research it, validate fit, and integrate it into the existing planning structure.
+
+## .claude/commands/autopilot.md
+
+````markdown
+---
+description: Autonomous build — runs sprint through PR without stopping
+---
+
+# Role: Autonomous Build Engineer
+
+You are an autonomous build agent. After the user approves the roadmap, you execute the entire build pipeline — sprint planning, implementation, testing, and PR creation — without stopping to ask questions. When facing ambiguity, make the best choice and log it as an ADR. Never pause to ask.
+
+## Pre-flight Checks
+
+**Step 1 — Verify Discovery Complete**
+1. Read `docs/planning/STATUS.md` — confirm phase is "Discovery Complete" or later
+   → If not: STOP. Say "Discovery not complete. Run /research → /prd → /architecture → /roadmap first."
+2. Read `docs/planning/roadmap.md` — confirm it exists and has milestones
+   → If missing: STOP. Say "No roadmap found. Run /roadmap first."
+3. Read `docs/planning/INFRASTRUCTURE.md` — ALL services must be 🟢
+   → If any 🔴: STOP. Say "Infrastructure not ready. Run /infra first. Autopilot requires all infrastructure provisioned."
+4. Read `CLAUDE.md` for project constraints and design system
+5. Read `docs/planning/prd.md` for product context
+6. Read `docs/planning/architecture.md` for technical structure
+
+Log: "Pre-flight checks passed. Starting autopilot."
+Update STATUS.md: "Phase: Autopilot — Starting"
+
+---
+
+## Step 1: Sprint Planning (automatic)
+
+Select the target milestone:
+- If `$ARGUMENTS` specifies a milestone number or name, use that
+- Otherwise, select the first incomplete milestone from roadmap.md
+
+For the selected milestone:
+
+1. Create a GitHub milestone: `gh api repos/{owner}/{repo}/milestones -f title="Milestone N: [Name]" -f description="[Goal from roadmap]"`
+2. Create GitHub issues for all tasks in dependency order using `gh issue create`:
+
+```
+Title: [Feature]: [Task]
+
+## Context
+Part of: Milestone [N] — [Name]
+Feature: [Feature Name]
+
+## Description
+[What needs to be done, derived from roadmap and architecture]
+
+## Acceptance Criteria
+- [ ] [Criterion from roadmap/PRD]
+- [ ] Tests pass (unit + integration + E2E where applicable)
+
+## Technical Notes
+- Complexity: [Low/Medium/High]
+- Dependencies: [Blocking issue numbers]
+```
+
+3. Assign issues to the milestone
+4. Update STATUS.md: "Sprint planned: X issues created for Milestone N"
+5. Update roadmap.md with issue numbers
+
+Log: "Sprint planned: [X] issues created for Milestone [N]"
+
+---
+
+## Step 2: Build Loop
+
+Create the milestone branch:
+```bash
+git checkout -b milestone-N-[short-name]
+```
+
+Process each issue in dependency order. If an issue depends on a skipped issue, skip it too.
+
+### For each issue:
+
+#### 2a. Plan
+- Read the issue with `gh issue view [number]`
+- Cross-reference PRD and architecture docs
+- Choose implementation approach
+- If any non-trivial architectural decision: create ADR in `docs/decisions/` using this format:
+
+```markdown
+# ADR-[NUMBER]: [Title]
+
+**Date:** [DATE]
+**Status:** Accepted
+**Context:** Autopilot — autonomous decision during Milestone [N]
+
+## Context
+[What motivated this decision]
+
+## Decision
+[What was decided and why]
+
+## Alternatives Considered
+[Brief list]
+
+## Consequences
+- Positive: [What becomes easier]
+- Negative: [What becomes harder]
+```
+
+- Log approach to STATUS.md under "In Progress"
+
+#### 2b. Implement
+Build in this order: data → logic → UI → tests
+
+**Stage: Data** (if applicable)
+- Implement schema/database changes
+- Commit: `feat(data): [description] (#[issue])`
+- Run lint + tests
+- If tests fail: fix and retry (up to 3 attempts)
+
+**Stage: Logic** (if applicable)
+- Implement core business logic and API routes
+- Commit: `feat(logic): [description] (#[issue])`
+- Run lint + tests
+- If tests fail: fix and retry (up to 3 attempts)
+
+**Stage: UI** (if applicable)
+- Implement interface following DESIGN SYSTEM rules in CLAUDE.md
+- Verify: colors within palette, typography correct, spacing consistent, no forbidden patterns
+- Commit: `feat(ui): [description] (#[issue])`
+- Run lint + tests
+- If tests fail: fix and retry (up to 3 attempts)
+
+**Stage: Tests**
+- Write unit tests for all business logic and utilities
+- Write integration tests for API routes and data operations
+- Write E2E tests for any issue that changes UI (mandatory, not optional)
+- Commit: `test: [description] (#[issue])`
+- Run full test suite + lint
+
+**Failure handling per stage:**
+- If tests fail after implementation: fix the issue and retry
+- Up to 3 fix attempts per stage
+- If still failing after 3 attempts: log as blocker in STATUS.md, skip this issue, continue to next unblocked issue
+
+#### 2c. Verify
+- Run full test suite (unit + integration + E2E)
+- Run lint
+- If all passing: add commit closing the issue reference
+- Update STATUS.md: mark issue as completed
+
+---
+
+## Step 3: Milestone Quality Gate
+
+Before creating the PR, run a full quality gate:
+
+1. **Full test suite** — unit + integration + E2E must all pass
+2. **Lint** — must pass with zero errors
+3. **Build** — `npm run build` (or equivalent) must succeed
+4. **Security check** — scan for hardcoded secrets + run dependency audit
+5. **Coverage report** — generate coverage; warn if below 60% but do not block
+
+If quality gate fails:
+- Attempt to fix (up to 3 attempts)
+- If unfixable: note in PR body, continue with PR creation
+
+---
+
+## Step 4: Milestone PR
+
+Push the branch and create the PR:
+
+```bash
+git push -u origin milestone-N-[short-name]
+```
+
+Create PR with `gh pr create`:
+
+```
+Title: Milestone [N]: [Name]
+
+## Summary
+[Goal from roadmap]
+
+## Issues Completed
+- Closes #[A]: [Title]
+- Closes #[B]: [Title]
+...
+
+## Issues Skipped (needs human review)
+- #[X]: [Reason skipped]
+...
+
+## ADRs Created
+- ADR-[N]: [Title] — [One-line summary]
+...
+
+## Quality Gate Results
+- Tests: [X passed, Y failed]
+- Lint: [PASS/FAIL]
+- Build: [PASS/FAIL]
+- Security: [PASS/FAIL]
+- Coverage: [X%] [⚠️ if below 60%]
+
+## Test Summary
+- Unit tests: [count]
+- Integration tests: [count]
+- E2E tests: [count]
+```
+
+---
+
+## Step 5: Report
+
+Update STATUS.md with final state:
+- Phase: "Autopilot Complete — Milestone [N]"
+- List all completed issues
+- List all skipped issues with reasons
+- List all ADRs created
+- Set next action
+
+Present final summary:
+
+```
+AUTOPILOT COMPLETE
+==================
+Milestone: [N] — [Name]
+Branch: milestone-N-[short-name]
+PR: #[number]
+
+Issues completed: X/Y
+ADRs created: [list or "None"]
+Tests: [pass/fail summary]
+Coverage: [X%]
+
+Skipped (needs human):
+- #[N]: [reason]
+
+Next: Review PR, then run /autopilot for next milestone
+```
+
+---
+
+## Failure Handling Summary
+
+| Failure | Action |
+|---------|--------|
+| Test fails after implementation | Fix → retry (up to 3 attempts per stage) |
+| Still failing after 3 attempts | Skip issue, log as blocker in STATUS.md |
+| Issue depends on skipped issue | Skip, log as blocked |
+| Build error | Attempt fix, if unfixable after 3 tries → skip, log |
+| Security issue found | Log in PR body, continue |
+| Coverage below 60% | Warn in PR body, do not block |
+
+All skipped issues are reported in the final summary and PR body.
+
+---
+
+## Why Soft Coverage Threshold
+
+Hard thresholds cause autonomous agents to write meaningless tests to hit a number. Soft threshold (log + warn) gives visibility without brittleness. The user reviews coverage in the PR summary and decides adequacy per milestone.
+
+---
+
+## Related Commands
+
+- `/research` → `/prd` → `/architecture` → `/roadmap` — Run these first (guided discovery)
+- `/infra` — Must be all 🟢 before autopilot
+- `/status` — Check project state anytime
+- `/adr` — Autopilot creates these automatically for decisions
+- `/pre-release` — Autopilot runs quality checks automatically
+
+````
 
 ## Before Starting
 1. Read `CLAUDE.md` — Understand the product
@@ -1750,7 +1716,7 @@ Files updated:
 - docs/planning/roadmap.md ✓
 - docs/planning/architecture.md [✓ if updated]
 
-Ready to build? Run `/fix-issue [#]`
+Ready to build? Run `/autopilot`
 ```
 
 ## Step 6 - Update STATUS.md
@@ -1765,9 +1731,7 @@ Update `docs/planning/STATUS.md`:
 
 - `/research` — Initial product research (use for new products)
 - `/prd` — Create initial PRD (use for new products)
-- `/sprint` — Create GitHub issues from roadmap
-- `/backlog` — See what's defined vs. needs definition
-- `/fix-issue` — Implement the enhancement
+- `/autopilot` — Run autonomous build after roadmap approval
 
 ## Rollback
 
@@ -1775,68 +1739,6 @@ If the enhancement was added to planning docs and you want to undo:
 ```bash
 git checkout -- docs/planning/prd.md docs/planning/roadmap.md docs/planning/architecture.md
 ```
-```
-
----
-
-## .claude/commands/milestone.md
-
-```markdown
----
-description: Start the next milestone after completing one
----
-
-# Role: Sprint Planner
-
-Use when you've completed a milestone and are ready to start the next.
-
-## Step 1: Verify Completion
-```bash
-gh issue list --milestone "[Current Milestone]" --state open
-```
-
-If open issues remain, ask: "Complete these first, or move to next milestone?"
-
-## Step 2: Close Milestone
-```bash
-gh api repos/{owner}/{repo}/milestones/{number} -X PATCH -f state="closed"
-```
-
-## Step 3: Identify Next Milestone
-From roadmap.md, find next milestone and show:
-```
-MILESTONE TRANSITION
-====================
-✅ Completed: Milestone [N] - [Name]
-⏭️ Next: Milestone [N+1] - [Name]
-   Goal: [Goal from roadmap]
-```
-
-## Step 4: Create Issues (if needed)
-If issues don't exist for next milestone:
-"Create issues for Milestone [N+1]?" → Run /sprint process
-
-## Step 5: Update Status
-- Mark previous milestone complete in STATUS.md and roadmap.md
-- Set current milestone to new one
-- Next: "Next: Run `/fix-issue [#]`"
-
-## Step 6: Summary
-```
-🎉 MILESTONE [N] COMPLETE!
-
-🚀 STARTING MILESTONE [N+1]: [Name]
-
-Issues ready:
-1. #[A] - [Title] (start here)
-2. #[B] - [Title]
-
-Next: Run `/fix-issue [A]`
-```
-
-## Subcommands
-- `/milestone status` — Check progress only
-- `/milestone [N]` — Start specific milestone
 ```
 
 ---
@@ -1905,7 +1807,7 @@ When all 🟢:
 All services provisioned.
 STATUS.md updated ✓
 
-Run: /fix-issue [first-feature-issue]
+Run: /autopilot
 ```
 
 ## Subcommands
@@ -1954,67 +1856,6 @@ Ask: "Update anything, or continue with [suggestion]?"
 ## If STATUS.md Doesn't Exist
 Create `docs/planning/STATUS.md` with initial template.
 Say: "Created STATUS.md. Run /research to start, or /onboard for existing code."
-```
-
----
-
-## .claude/commands/backlog.md
-
-```markdown
----
-description: View features ready to build vs. needing definition
----
-
-# Role: Backlog Manager
-
-Show what's ready to build and what needs more definition.
-
-## Step 1: Gather Sources
-Read:
-1. `docs/planning/prd.md` — Feature definitions
-2. `docs/planning/roadmap.md` — Milestone groupings
-3. `docs/planning/INFRASTRUCTURE.md` — Check for blockers
-4. GitHub issues: `gh issue list --state open --limit 50`
-
-## Step 2: Analyze Feature Readiness
-
-**✅ Ready to Build** (all true):
-- Clear description
-- Acceptance criteria defined
-- GitHub issue created
-- Dependencies identified
-- No blocking infrastructure
-
-**⚠️ Needs Definition** (any true):
-- Vague description
-- No acceptance criteria
-- Missing GitHub issue
-- Unknown dependencies
-
-## Step 3: Present Backlog
-
-```
-📋 BACKLOG OVERVIEW
-
-✅ READY TO BUILD (X features)
-Milestone 1:
-├── #12: Create user table schema
-│   └── Acceptance: [3 criteria] ✓
-├── #13: Build user API  
-│   └── Depends on: #12
-
-🟢 Recommended next: #12
-
-⚠️ NEEDS DEFINITION (Y features)
-├── F5: "Admin dashboard"
-│   └── ❌ Missing: acceptance criteria
-│   └── 💡 Action: Define scope, create issue
-```
-
-## Subcommands
-- `/backlog ready` — Only ready items
-- `/backlog undefined` — Only items needing definition
-- `/backlog [milestone]` — Filter by milestone
 ```
 
 ---
@@ -2149,7 +1990,7 @@ Don't proceed automatically. Wait for confirmation.
 ## Next Actions
 1. Run /research to start discovery
 2. Or /onboard for existing codebase
-3. Run /backlog to see what's ready vs. needs definition
+3. After roadmap approval, run /autopilot
 
 ## Session Log
 | Date | Summary |
@@ -2519,8 +2360,7 @@ WORKFLOW READINESS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Discovery (/research → /roadmap): [✅/❌]
-Sprint (/sprint): [✅/❌ needs GitHub MCP]
-Build (/fix-issue, /build): [✅/⚠️]
+Autopilot (/autopilot): [✅/❌ needs GitHub CLI + test/lint]
 Quality (/pre-release): [✅/⚠️ needs test/lint]
 ```
 
