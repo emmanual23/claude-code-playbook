@@ -80,6 +80,7 @@ PROJECT FILES
 ├── .claudeignore: [✅ Found | ⚠️ Missing - recommended]
 ├── docs/planning/STATUS.md: [✅ Found | ❌ Missing]
 ├── Test script: [✅ Found | ❌ Missing]
+│   **Use web search to verify current best practices and recommended tools for this stack.** Check that installation commands, config formats, and recommended versions are up to date.
 │   [If missing, offer to set up:]
 │   "No test script found. Would you like me to set up testing?"
 │   
@@ -217,6 +218,13 @@ You can now run the full workflow:
 /research → /prd → /architecture → /roadmap → /sprint → /fix-issue 1
 
 Happy building!
+```
+
+## Rollback
+
+This command may create config files (CI workflows, test configs, .env.example). To revert:
+```bash
+git checkout -- [created config files]
 ```
 
 ## Related Commands

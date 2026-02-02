@@ -87,6 +87,8 @@ Step [N] of [Total]: [Step Title]
 Let me know when done, or say "skip" to handle later.
 ```
 
+**Before each service setup, use web search to get current setup instructions and verify pricing/free-tier limits.** Service UIs and onboarding flows change frequently.
+
 ### Service-Specific Guides
 
 **For Supabase:**
@@ -367,7 +369,9 @@ SCALING NOTES
 Update INFRASTRUCTURE.md with these estimates? (yes/no)
 ```
 
-**Common service pricing (as of 2024):**
+**Use web search to get current pricing for each service in INFRASTRUCTURE.md.** Do not rely on training data for pricing — it changes frequently. Present a fresh table with today's rates.
+
+**Common service pricing (reference — verify with web search):**
 
 | Service | Free Tier | Paid Starts At |
 |---------|-----------|----------------|
@@ -383,8 +387,16 @@ Update INFRASTRUCTURE.md with these estimates? (yes/no)
 | Stripe | 2.9% + $0.30 | Same |
 | Resend | 3K emails/month | $20/month |
 
+## Rollback
+
+This command modifies infrastructure docs and may create config files. To revert:
+```bash
+git checkout -- docs/planning/INFRASTRUCTURE.md
+```
+
 ## Related Commands
 
 - `/architecture` — Identifies infrastructure requirements
 - `/setup` — Check environment and configuration status
 - `/autopilot` — Start building (after infrastructure is provisioned)
+- `/monitor` — Set up monitoring and observability

@@ -72,6 +72,13 @@ If STATUS.md was created or exists:
 If infrastructure was identified:
 → Suggest: "Run `/infra status` to check service connectivity"
 
+## Rollback
+
+This command may create planning docs. To revert:
+```bash
+git checkout -- docs/planning/STATUS.md docs/planning/INFRASTRUCTURE.md
+```
+
 ## Related Commands
 
 - `/status` — View current project state

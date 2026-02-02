@@ -12,6 +12,25 @@ description: Run shift-left security checks on the codebase
 
 Run these checks and report findings:
 
+**0. Run Automated Scanners First**
+
+Before manual analysis, run any available automated tools:
+
+```bash
+# Secret scanning
+npx gitleaks detect --source . 2>/dev/null || echo "gitleaks not installed — skipping"
+
+# SAST (if available)
+npx semgrep --config auto . 2>/dev/null || echo "semgrep not installed — skipping"
+
+# Dependency audit (also run in section 2)
+npm audit --json 2>/dev/null || pip-audit --format json 2>/dev/null || echo "no audit tool available"
+```
+
+Use findings from any tools that ran as the starting point for each section below. Supplement with manual analysis for anything the tools miss.
+
+> If no automated tools are installed, proceed with manual analysis and recommend installing gitleaks and semgrep in the final report.
+
 **1. Secrets Scanning**
 Search for hardcoded secrets in the codebase:
 - API keys, tokens, passwords
@@ -69,6 +88,25 @@ If auth exists, verify:
 - No sensitive data in JWTs
 - HTTPS enforced
 
+**6. Runtime Security**
+Check production security headers and configuration:
+- CSP headers configured (`Content-Security-Policy`)
+- CORS not set to `*` in production
+- Rate limiting on auth endpoints and public APIs
+- HTTPS enforced (no mixed content)
+- Secure cookie flags (`HttpOnly`, `Secure`, `SameSite`)
+- `X-Frame-Options` / `X-Content-Type-Options` headers set
+
+**7. Git History**
+Check git history for accidentally committed secrets:
+```bash
+git log --all -p | grep -E "(sk-|pk_|password|secret)" | head -20
+```
+If secrets found in history:
+- Recommend `git-filter-repo` or BFG Repo-Cleaner to remove
+- Rotate any exposed keys immediately
+- Add patterns to `.gitignore` to prevent recurrence
+
 ## Report Format
 
 Present findings as:
@@ -92,13 +130,63 @@ Present findings as:
 
 ## After Check
 
-1. If CRITICAL or HIGH issues found:
-   - Ask: "Should I fix these now?"
-   - If yes, fix immediately before proceeding
+```
+How would you like to proceed?
 
-2. Add any LOW issues to tech debt tracking
+  [A] Fix all issues (Recommended if CRITICAL found)
+  [C] Fix CRITICAL and HIGH only
+  [P] Pick specific issues to fix
+  [S] Skip — log all to TECH-DEBT.md
+```
 
-3. Update STATUS.md with security check results
+→ Wait for user choice.
+
+For each fix, present:
+```
+Finding: [description]
+Location: [file:line or config location]
+
+  BEFORE:
+  > [current code/config]
+
+  AFTER:
+  > [fixed code/config]
+
+Apply? [Y/n/a]
+```
+
+The `a` shortcut applies all remaining fixes without asking.
+
+For issues the user declines to fix:
+- CRITICAL → record in TECH-DEBT.md with priority "critical-deferred"
+- HIGH → add to TECH-DEBT.md
+- MEDIUM/LOW → add to tech debt tracking
+
+### Verify Fixes
+
+After applying fixes, re-run the automated scanners from Step 0:
+```bash
+npx gitleaks detect --source . 2>/dev/null
+npm audit 2>/dev/null
+```
+
+If new issues found:
+```
+⚠️ Fixes introduced [N] new issue(s).
+```
+→ Show and address before completing.
+
+If clean:
+```
+✅ All fixes verified. No new issues introduced.
+```
+
+Update STATUS.md with security check results.
+
+Append to "Command History" in STATUS.md:
+```
+| /security-check | [date] | [clean / issues-found] | [X] critical, [Y] high, [Z] fixed |
+```
 
 ## Related Commands
 
@@ -106,6 +194,15 @@ Present findings as:
 - `/deps` — Dependency audit for known vulnerabilities
 - `/pre-release` — Full pre-deployment checklist
 - `/setup` — Check environment configuration
+- `/monitor` — Set up error tracking and observability
+- `/hotfix` — Emergency production fix workflow
+
+## Rollback
+
+This command may apply security fixes. To revert changes:
+```bash
+git checkout -- [modified files]
+```
 
 ## Quick Check Mode
 

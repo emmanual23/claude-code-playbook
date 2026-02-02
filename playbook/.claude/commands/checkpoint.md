@@ -67,6 +67,13 @@ Key context for next session:
 STATUS.md updated at: [timestamp]
 ```
 
+## Rollback
+
+This command modifies STATUS.md. To revert:
+```bash
+git checkout -- docs/planning/STATUS.md
+```
+
 ## Related Commands
 
 - `/resume-work` — Continue from last checkpoint

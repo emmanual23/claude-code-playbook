@@ -138,6 +138,13 @@ Next: Run `/fix-issue [A]`
 ```
 → Transition directly to Milestone 2
 
+## Rollback
+
+This command modifies planning docs. To revert:
+```bash
+git checkout -- docs/planning/STATUS.md docs/planning/roadmap.md
+```
+
 ## Related Commands
 
 - `/deploy` — Deploy the milestone before transitioning
@@ -145,3 +152,4 @@ Next: Run `/fix-issue [A]`
 - `/fix-issue` — Implement issues in the new milestone
 - `/status` — View current project state
 - `/backlog` — See what's ready to build vs. needs definition
+- `/hotfix` — Emergency production fix workflow
